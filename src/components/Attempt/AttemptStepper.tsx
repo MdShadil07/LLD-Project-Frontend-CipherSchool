@@ -1,0 +1,7 @@
+import { Check } from 'lucide-react';
+import { ATTEMPT_STEPS, type AttemptStepId } from './attempt.types';
+
+export default function AttemptStepper({ currentStep, onChange }: { currentStep: AttemptStepId; onChange: (step: AttemptStepId) => void }) {
+  const currentIndex = ATTEMPT_STEPS.findIndex((step) => step.id === currentStep);
+  return <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"><div className="flex min-w-[760px] items-start">{ATTEMPT_STEPS.map((step, index) => { const complete = index < currentIndex; const active = index === currentIndex; return <button key={step.id} type="button" onClick={() => onChange(step.id)} className="group relative flex flex-1 flex-col items-center gap-2 text-center"><span className={`relative z-10 grid h-10 w-10 place-items-center rounded-xl border-2 text-sm font-bold transition-colors ${active ? 'border-indigo-600 bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : complete ? 'border-indigo-500 bg-white text-indigo-600' : 'border-slate-200 bg-white text-slate-400 group-hover:border-indigo-300'}`}>{complete ? <Check className="h-5 w-5" /> : index + 1}</span><span className={`text-xs font-bold ${active ? 'text-indigo-700' : complete ? 'text-slate-700' : 'text-slate-400'}`}>{step.label}</span><span className="hidden text-[10px] text-slate-400 sm:block">{step.hint}</span>{index < ATTEMPT_STEPS.length - 1 && <span className={`absolute left-1/2 right-[-50%] top-5 h-px ${index < currentIndex ? 'bg-indigo-500' : 'bg-slate-200'}`} />}</button>; })}</div></div>;
+}

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-slate-900;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* The workspace screens use compact data-dense cards, but keep body copy readable. */
+.dashboard-scale [class*="text-[7px]"],
+.dashboard-scale [class*="text-[8px]"],
+.dashboard-scale [class*="text-[9px]"],
+.problem-scale [class*="text-[7px]"],
+.problem-scale [class*="text-[8px]"],
+.problem-scale [class*="text-[9px]"] {
+  font-size: 0.75rem !important;
+}
+
+.sidebar-scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar-scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.delay-150 {
+  animation-delay: 0.15s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(99,102,241,0.3); }
+  50%       { box-shadow: 0 0 24px rgba(99,102,241,0.6); }
+}
+
