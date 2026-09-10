@@ -2,6 +2,8 @@ import { useState, useEffect, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Logo from '../../components/Global Component/logo';
+
+import ExploreWorkModal from '../../components/PreviousProject/previousProject'
 import {
   ArrowRight,
   BookOpen,
@@ -38,7 +40,7 @@ const Badge = ({ children, variant = 'indigo', className = '' }: { children: Rea
 };
 
 const SectionHeading = ({ badge, title, subtitle, align = 'left' }: SectionHeadingProps) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-100px" }}
@@ -85,7 +87,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Trigger */}
-        <button 
+        <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="md:hidden p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors"
         >
@@ -96,7 +98,7 @@ const Navbar = () => {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -104,8 +106,8 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((item) => (
-                <a 
-                  key={item} 
+                <a
+                  key={item}
                   href={`#${item.toLowerCase().replace(/\s+/g, '-')}`}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-base font-semibold text-slate-700 hover:text-indigo-600"
@@ -137,9 +139,9 @@ const Hero = () => {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8 items-center">
-          
+
           {/* Left Text */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -158,7 +160,7 @@ const Hero = () => {
             <p className="mt-6 text-lg sm:text-xl text-slate-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
               Practice real-world Low-Level Design problems with instant AI evaluation, automated SOLID scoring, and architectural feedback.
             </p>
-            
+
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <button className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-indigo-600/25 hover:bg-indigo-500 active:scale-95 transition-all">
                 Start Practicing Free <ArrowRight className="h-5 w-5" />
@@ -185,7 +187,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Right Interactive Sandbox Window */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -207,13 +209,13 @@ const Hero = () => {
 
               {/* Sandbox Tabs */}
               <div className="flex border-b border-slate-800 bg-slate-900/80 px-4 gap-4 text-xs font-semibold">
-                <button 
+                <button
                   onClick={() => setActiveTab('diagram')}
                   className={`py-3 border-b-2 transition-colors ${activeTab === 'diagram' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
                 >
                   Class Diagram
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('rubric')}
                   className={`py-3 border-b-2 transition-colors ${activeTab === 'rubric' ? 'border-indigo-500 text-indigo-400' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
                 >
@@ -340,7 +342,7 @@ const PopularProblems = () => {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {problems.map((p, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               whileHover={{ y: -6 }}
               className="bg-white rounded-3xl p-6 shadow-sm ring-1 ring-slate-200/80 hover:shadow-xl transition-all flex flex-col justify-between cursor-pointer group"
@@ -353,7 +355,7 @@ const PopularProblems = () => {
                 <h3 className="text-lg font-bold text-slate-900 group-hover:text-indigo-600 transition-colors mb-2">{p.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{p.desc}</p>
               </div>
-              
+
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
                 <span className="flex items-center gap-1.5"><Users className="h-4 w-4 text-slate-400" /> {p.attempts} solved</span>
                 <span className="text-indigo-600 group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Practice <ArrowRight className="h-3 w-3" /></span>
@@ -445,13 +447,13 @@ const Pricing = () => {
 
         <div className="flex justify-center mb-12">
           <div className="bg-slate-200/80 p-1 rounded-2xl flex items-center gap-2">
-            <button 
+            <button
               onClick={() => setAnnual(false)}
               className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${!annual ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'}`}
             >
               Monthly Billing
             </button>
-            <button 
+            <button
               onClick={() => setAnnual(true)}
               className={`px-4 py-2 text-xs font-bold rounded-xl transition-all ${annual ? 'bg-indigo-600 text-white shadow-sm' : 'text-slate-600'}`}
             >
@@ -602,6 +604,8 @@ const Footer = () => (
 // --- Root Component ---
 
 export default function App() {
+  const [isWorkModalOpen, setIsWorkModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       <Navbar />
@@ -613,6 +617,31 @@ export default function App() {
       <Testimonials />
       <CTA />
       <Footer />
+
+      {/* ── Integrated Explore Work Modal ── */}
+      <ExploreWorkModal isOpen={isWorkModalOpen} onClose={() => setIsWorkModalOpen(false)} />
+
+      {/* ── Floating Re-open Button (Visible only when modal is closed) ── */}
+      <AnimatePresence>
+        {!isWorkModalOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-[100]"
+          >
+            <button
+              onClick={() => setIsWorkModalOpen(true)}
+              className="group flex items-center gap-2.5 rounded-full bg-slate-900 p-2 pr-5 text-sm font-semibold text-white shadow-2xl shadow-slate-900/30 ring-1 ring-white/10 transition-all duration-300 hover:bg-slate-800 hover:scale-105 active:scale-95"
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-inner">
+                <Sparkles className="h-4 w-4 animate-pulse" />
+              </span>
+              Explore My Work
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
