@@ -1,6 +1,6 @@
-import React from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, GitBranch, ArrowRight, Sparkles } from 'lucide-react';
+import { X, GitBranch, ArrowRight, } from 'lucide-react';
 
 const projectData = {
     logoSrc: "/logo.svg",
