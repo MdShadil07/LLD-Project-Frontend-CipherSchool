@@ -11,14 +11,20 @@ export type SubmissionResponse = {
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api/v1';
 
+import { getStoredToken } from '../features/auth/auth.api';
+
 export async function submitAttempt(attemptId: string): Promise<{
   submission: SubmissionResponse;
   attemptStatus: 'SUBMITTED';
 }> {
+  const token = getStoredToken();
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const response = await fetch(`${API_URL}/attempts/${attemptId}/submit`, {
     method: 'POST',
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
   });
 
   const data = await response.json();

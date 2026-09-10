@@ -20,8 +20,13 @@ export type Problem = ProblemSummary & {
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api/v1';
 
+import { getStoredToken } from '../features/auth/auth.api';
+
 async function request<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, { credentials: 'include' });
+  const token = getStoredToken();
+  const headers: Record<string, string> = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const response = await fetch(`${API_URL}${path}`, { credentials: 'include', headers });
   if (response.ok) return response.json() as Promise<T>;
   const body = await response.json().catch(() => ({ message: 'Unable to load problems.' }));
   throw new Error(body.message ?? 'Unable to load problems.');

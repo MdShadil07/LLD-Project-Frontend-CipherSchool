@@ -39,8 +39,16 @@ export type EvaluationHistoryEntry = {
 
 const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api/v1';
 
+import { getStoredToken } from '../features/auth/auth.api';
+
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(`${API_URL}${path}`, { ...options, credentials: 'include', headers: { 'Content-Type': 'application/json', ...options?.headers } });
+  const token = getStoredToken();
+  const authHeader: Record<string, string> = token ? { 'Authorization': `Bearer ${token}` } : {};
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json', ...authHeader, ...options?.headers },
+  });
   const data = await response.json();
   if (!response.ok) throw new Error(data.error?.message || data.message || 'Unable to load evaluations.');
   return data.data as T;

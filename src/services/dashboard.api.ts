@@ -13,8 +13,13 @@ export type DashboardData = {
   recentAttempts: DashboardEntry[];
 };
 
+import { getStoredToken } from '../features/auth/auth.api';
+
 export async function getDashboard(): Promise<DashboardData> {
-  const response = await fetch(`${API_URL}/dashboard`, { credentials: 'include' });
+  const token = getStoredToken();
+  const headers: Record<string, string> = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  const response = await fetch(`${API_URL}/dashboard`, { credentials: 'include', headers });
   const body = await response.json();
   if (!response.ok) throw new Error(body.error?.message || body.message || 'Unable to load dashboard.');
   return body.data as DashboardData;
