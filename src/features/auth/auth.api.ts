@@ -3,7 +3,10 @@ type ApiResponse = { user: AuthUser; token?: string };
 
 const VITE_API_URL = 'https://lld-project-backend-cipherschool.onrender.com/api/v1';
 
-console.log('API_URL:', VITE_API_URL);
+console.log(
+  '🚀🚀🚀 NEW FRONTEND BUILD — RENDER API 🚀🚀🚀',
+  VITE_API_URL
+);
 const TOKEN_KEY = 'session_token';
 
 export function getStoredToken(): string | null {
