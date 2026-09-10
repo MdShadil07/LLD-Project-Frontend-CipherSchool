@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Bell, ChevronDown, Search, Command } from 'lucide-react';
 import type { AuthUser } from '../../features/auth/auth.api';
 import { useTheme } from '../../contexts/ThemeContext';

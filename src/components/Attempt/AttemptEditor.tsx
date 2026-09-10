@@ -2,18 +2,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Bold, Code2, Italic, Link2, List, Sparkles } from 'lucide-react';
 
-// Type definitions ensuring self-contained type safety
-export type AttemptStepId = 'requirements' | 'entities' | 'relationships' | 'flow' | 'tradeoffs' | 'review';
-
-export interface Submission {
-  requirements?: string;
-  entities?: string;
-  relationships?: string;
-  flow?: string;
-  tradeoffs?: string;
-  assumptions?: string;
-  [key: string]: any;
-}
+import type { AttemptStepId, Submission } from './attempt.types';
 
 const fields: Record<
   Exclude<AttemptStepId, "review">,

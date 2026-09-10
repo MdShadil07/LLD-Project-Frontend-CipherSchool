@@ -3,7 +3,6 @@ import {
   Bell, 
   BookOpen, 
   CarFront, 
-  CheckCircle2, 
   ChevronDown, 
   Clock3, 
   Code2, 
@@ -14,7 +13,6 @@ import {
   SlidersHorizontal, 
   Sparkles, 
   Target, 
-  UsersRound, 
   Zap,
   ArrowRight,
   ShieldCheck

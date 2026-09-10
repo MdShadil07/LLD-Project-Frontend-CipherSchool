@@ -567,7 +567,7 @@ const Footer = () => (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-5 gap-10">
       <div className="col-span-2">
         <div className="flex items-center gap-2 mb-4">
-          <Logo dark />
+          <Logo theme="dark" />
         </div>
         <p className="text-xs leading-relaxed text-slate-400 max-w-sm mb-6">
           The ultimate platform for mastering Low-Level Design, Object-Oriented Design, and architectural system interviews.

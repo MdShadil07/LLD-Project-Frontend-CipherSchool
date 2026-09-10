@@ -1,6 +1,5 @@
-import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Check, X, Sparkles, ShieldAlert, Layers } from 'lucide-react';
+import { BookOpen, Check, X, Sparkles, Layers } from 'lucide-react';
 
 const requirements = [
   'Multiple floors and parking spots',
@@ -79,7 +78,7 @@ export default function AttemptProblemDrawer({ open, onClose }: AttemptProblemDr
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400">Required behavior</h3>
                 </div>
                 <div className="space-y-3 rounded-2xl border border-slate-200/80 bg-slate-50/50 p-4">
-                  {requirements.map((requirement, index) => (
+                  {requirements.map((requirement) => (
                     <div key={requirement} className="flex items-start gap-3">
                       <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mt-0.5">
                         <Check className="h-3 w-3 stroke-[3]" />

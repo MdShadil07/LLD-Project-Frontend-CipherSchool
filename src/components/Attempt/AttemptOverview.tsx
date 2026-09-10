@@ -1,5 +1,4 @@
-import React from 'react';
-import { BarChart3, CheckCircle2, Circle, ShieldCheck, Sparkles, Trophy, Zap } from 'lucide-react';
+import { BarChart3, CheckCircle2, Circle, ShieldCheck, Sparkles } from 'lucide-react';
 import type { AttemptStepId, Submission } from './attempt.types';
 
 const rubric = [

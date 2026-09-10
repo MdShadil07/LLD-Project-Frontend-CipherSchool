@@ -9,7 +9,6 @@ import {
   Star, 
   Trophy, 
   TrendingUp,
-  CheckCircle2,
   Clock,
   ChevronRight,
   Layers
@@ -20,7 +19,7 @@ import { Link } from 'react-router-dom';
 export interface ProblemSummary {
   slug: string;
   title: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficulty: string;
   description: string;
   [key: string]: any;
 }
@@ -38,12 +37,12 @@ export interface DashboardEntry {
   problem?: {
     title: string;
     [key: string]: any;
-  };
+  } | null;
   evaluation?: {
-    overallScore?: number;
+    overallScore?: number | null;
     status?: string;
     [key: string]: any;
-  };
+  } | null;
 }
 
 export interface DashboardData {
@@ -54,7 +53,7 @@ export interface DashboardData {
     practiceSeconds: number;
   };
   activity: Array<{ label: string; attempts: number }>;
-  scoreHistory: Array<{ label: string; score: number }>;
+  scoreHistory: Array<{ label?: string; completedAt?: string; score: number }>;
   [key: string]: any;
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 export const Logo = ({ 
   variant = 'horizontal', // 'horizontal' | 'sidebar' | 'icon' | 'badge'
