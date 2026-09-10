@@ -1,8 +1,9 @@
 export type AuthUser = { id: string; name: string; email: string; createdAt: string };
 type ApiResponse = { user: AuthUser; token?: string };
 
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api/v1';
+const API_URL = 'https://lld-project-backend-cipherschool.onrender.com/api/v1';
 
+console.log('API_URL:', API_URL);
 const TOKEN_KEY = 'session_token';
 
 export function getStoredToken(): string | null {
