@@ -21,7 +21,6 @@ import {
 import { AppSidebar } from "../../components/Global Component/AppSidebar";
 import ThemeToggle from "../../components/Global Component/ThemeToggle";
 import AttemptEditor from "../../components/Attempt/AttemptEditor";
-import AttemptFeedback from "../../components/Attempt/AttemptFeedback";
 import AttemptHelperPanel from "../../components/Attempt/AttemptHelperPanel";
 import AttemptOverview, {
   ReadinessChecklist,
@@ -39,6 +38,7 @@ import {
 } from "../../services/practice.api";
 import { problemsApi, type Problem } from "../../services/problems.api";
 import { submitAttempt as submitAttemptApi } from "../../services/submissions.api";
+import { evaluationsApi } from "../../services/evaluations.api";
 
 const fieldForStep: Record<
   Exclude<AttemptStepId, "review">,
@@ -209,9 +209,17 @@ export default function PracticePage() {
       const savedAttempt = await practiceApi.saveDraft(id, attempt.draft, elapsed);
       setAttempt(savedAttempt.attempt);
       setMessage("Submitting your solution...");
-      await submitAttemptApi(id);
+      const submissionResult = await submitAttemptApi(id);
       setAttempt((current) => current ? { ...current, status: "SUBMITTED" } : current);
-      setMessage("Solution submitted");
+      setMessage("Evaluation in progress...");
+      const submissionId = submissionResult.submission._id || submissionResult.submission.id;
+      if (!submissionId) throw new Error("Submission was created without an id.");
+      try {
+        await evaluationsApi.evaluate(submissionId);
+      } catch (evaluationError) {
+        setMessage(evaluationError instanceof Error ? evaluationError.message : "Evaluation failed.");
+      }
+      navigate(`/evaluation/problem/${attempt.problemId}`);
     } catch (err) {
       setMessage(err instanceof Error ? err.message : "Unable to submit your solution.");
     } finally {
@@ -301,14 +309,7 @@ export default function PracticePage() {
             <div className="mt-6 flex flex-col gap-6 xl:flex-row">
               <div className="min-w-0 flex-1">
                 {step === "review" ? (
-                  attempt.status === "COMPLETED" ? (
-                    <AttemptFeedback
-                      attempt={attempt as any}
-                      onRetry={() => {}}
-                    />
-                  ) : (
-                    <ReviewCard submission={attempt.draft} valid={isValid()} />
-                  )
+                  <ReviewCard submission={attempt.draft} valid={isValid()} />
                 ) : (
                   <AttemptEditor
                     step={

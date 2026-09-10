@@ -22,7 +22,8 @@ export default function App() {
         <Route path="/practice" element={<PracticePage />} />
         <Route path="/practice/:id" element={<PracticePage />} />
         <Route path="/my-attempts" element={<MyAttemptsPage />} />
-        <Route path="/evaluation/:attemptId" element={<EvaluationPage />} />
+        <Route path="/evaluation" element={<EvaluationPage />} />
+        <Route path="/evaluation/problem/:problemId" element={<EvaluationPage />} />
         <Route path="/problems" element={<ProblemsPage />} />
         <Route path="/problems/parking-lot" element={<ProblemPage />} />
         <Route path="/problems/:slug" element={<ProblemPage />} />
