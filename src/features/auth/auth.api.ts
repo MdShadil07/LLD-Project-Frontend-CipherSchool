@@ -1,9 +1,9 @@
 export type AuthUser = { id: string; name: string; email: string; createdAt: string };
 type ApiResponse = { user: AuthUser; token?: string };
 
-const API_URL = 'https://lld-project-backend-cipherschool.onrender.com/api/v1';
+const VITE_API_URL = 'https://lld-project-backend-cipherschool.onrender.com/api/v1';
 
-console.log('API_URL:', API_URL);
+console.log('API_URL:', VITE_API_URL);
 const TOKEN_KEY = 'session_token';
 
 export function getStoredToken(): string | null {
@@ -26,7 +26,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   };
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const response = await fetch(`${API_URL}${path}`, {
+  const response = await fetch(`${VITE_API_URL}${path}`, {
     ...options,
     credentials: 'include',
     headers,
